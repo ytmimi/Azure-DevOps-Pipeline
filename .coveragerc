@@ -1,0 +1,25 @@
+[run]
+source = sample_package
+branch = True
+
+[report]
+omit =
+    *__init__.py
+
+exclude_lines =
+    if __name__ == .__main__.:
+    def __repr__
+
+
+# Don't include files with 100% coverage
+skip_covered = True
+
+# Target coverage %. Fail if coverage is below this value
+fail_under = 75.0
+
+[html]
+#output html report
+directory = coverage_report
+
+#Name of the report
+title = Azure-Pipelines-Test Coverage Report
