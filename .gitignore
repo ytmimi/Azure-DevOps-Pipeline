@@ -1,0 +1,15 @@
+# Documentation
+docs/build
+
+# Text editor
+.vscode
+
+# Distribution
+dist/
+build/
+
+# cache files
+__pycache__
+
+# virtual environment
+venv
