@@ -23,6 +23,9 @@ steps:
     pytest test/ --junitxml=junit/test-results.xml --cov-report=xml --cov-report=html --cov=sample_package
   displayName: 'Test with pytest'
 
+- script: ls -la
+  displayName: 'List directory content'
+
 - task: PublishTestResults@2
   condition: succeededOrFailed()
   inputs:
