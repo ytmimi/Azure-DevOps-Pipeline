@@ -1,15 +1,11 @@
-# Starter pipeline
-# Start with a minimal pipeline that you can customize to build and deploy your code.
-# Add steps that build, run tests, deploy, and more:
-# https://aka.ms/yaml
-
 trigger:
-- master
+ - master
 
 pool:
   vmImage: 'ubuntu-latest'
 
 steps:
+
 - task: UsePythonVersion@0
   inputs:
     versionSpec: '3.7'
@@ -21,9 +17,14 @@ steps:
 
 - script: |
     pip install pytest
+    pip install coverage=4.4.2
     pip install pytest-cov
-    pytest test/ --doctest-modules --junitxml=junit/test-results.xml --cov-report=xml --cov-report=html
+    pip install -e .
+    pytest test/ --junitxml=junit/test-results.xml --cov-report=xml --cov-report=html --cov=sample_package
   displayName: 'Test with pytest'
+
+- script: ls -la
+  displayName: 'List directory content'
 
 - task: PublishTestResults@2
   condition: succeededOrFailed()
@@ -35,4 +36,4 @@ steps:
   inputs:
     codeCoverageTool: Cobertura
     summaryFileLocation: '$(System.DefaultWorkingDirectory)/**/coverage.xml'
-    reportDirectory: '$(System.DefaultWorkingDirectory)/**/htmlcov'
+    reportDirectory: '$(System.DefaultWorkingDirectory)/**/coverage_report'
